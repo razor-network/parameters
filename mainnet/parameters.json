@@ -1,0 +1,147 @@
+[
+    {
+        "name": "withdrawLockPeriod",
+      "MIN": 1,
+      "MAX": 1000,
+      "value": 300,
+      "type": "epoch",
+      "allowedDiff": 10
+    },
+    {
+        "name": "maxAltBlocks",
+      "MIN": 1,
+      "MAX": 100,
+      "value": 5,
+      "type": "block",
+      "allowedDiff": 10
+    },
+    {
+        "name": "maxTolerance",
+        "MIN": 0,
+        "MAX": 10000000,
+        "value": 1000000,
+        "type": "percentage",
+        "allowedDiff": 10
+      },
+      {
+          "name": "withdrawInitiationPeriod",
+        "MIN": 1,
+        "MAX": 100000,
+        "value": 300,
+        "type": "epoch",
+        "allowedDiff": 10
+      },
+      {
+       "name": "resetUnstakeLockPenalty",
+      "MIN": 1,
+      "MAX": 10000000,
+      "value": 1000,
+      "type": "percentage",
+      "allowedDiff": 10
+      },
+      {
+        "name": "unstakeLockPeriod",
+       "MIN": 1,
+       "MAX": 1000,
+       "value": 300,
+       "type": "epoch",
+       "allowedDiff": 10
+       },
+       {
+        "name": "maxCommission",
+       "MIN": 0,
+       "MAX": 100,
+       "value": 20,
+       "type": "percentage",
+       "allowedDiff": 10
+       },
+       {
+        "name": "blockReward",
+       "MIN": 0,
+       "MAX": 2500,
+       "value": 1852000000000000000000,
+       "type": "token",
+       "allowedDiff": 10
+       },
+       {
+        "name": "minStake",
+       "MIN": 1000000000000000000000000,
+       "MAX": 100000000000000000000000000,
+       "value": 1000000000000000000000000,
+       "type": "token",
+       "allowedDiff": 10
+       },
+       {
+        "name": "penaltyNotRevealNum",
+         "MIN": 0,
+        "MAX": 10000000,
+        "value": 100,
+        "type": "percentage",
+        "allowedDiff": 10
+       },
+       {
+        "name": "penaltyAgeNotRevealNum",
+         "MIN": 0,
+        "MAX": 10000000,
+        "value": 100,
+        "type": "percentage",
+        "allowedDiff": 10
+       },
+       {
+        "name": "epochLimitForUpdateCommission",
+       "MIN": 1,
+       "MAX": 100000,
+       "value": 1000,
+       "type": "epoch",
+       "allowedDiff": 10
+       },
+       {
+        "name": "deltaCommission",
+       "MIN": 1,
+       "MAX": 100,
+       "value": 3,
+       "type": "percentage",
+       "allowedDiff": 10
+       },
+       {
+        "name": "maxAge",
+       "MIN": 1,
+       "MAX": 10000000,
+       "value": 1000000,
+       "type": null,
+       "allowedDiff": 10
+       },
+       {
+        "name": "minSafeRazor",
+       "MIN": 100000000000000000000000,
+       "MAX": 100000000000000000000000000,
+       "value": 100000000000000000000000,
+       "type": "token",
+       "allowedDiff": 10
+       },
+       {
+        "name": "toAssign",
+       "MIN": 1,
+       "MAX": 10,
+       "value": 3,
+       "type": null,
+       "allowedDiff": 10
+       },
+       {
+        "name": "buffer",
+       "MIN": 1,
+       "MAX": 300,
+       "value": 30,
+       "type": null,
+       "allowedDiff": 10
+       },
+       {
+        "name": "SlashNum",
+        "value": {
+            "bounty": 100000,
+            "burn": 0,
+            "keep": 400000
+        },
+        "type": null
+       }
+  ]
