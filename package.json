@@ -4,7 +4,7 @@
   "description": "Governance parameters for the Razor Network Oracle",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
