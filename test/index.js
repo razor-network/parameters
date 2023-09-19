@@ -28,7 +28,7 @@ describe("Parameters test", () => {
     mainnetParameters.map((param, index) => {
       Object.keys(param).map((key) => {
         if(key == "type") {
-            if(param.name == "buffer" || param.name == "toAssign" || param.name == "maxAge") {
+            if(param.name == "buffer" || param.name == "toAssign" || param.name == "maxAge" || param.name == "maxAltBlocks") {
                 assert.isNull(param[key], `Mainnet Parameter ${param.name} [${key} ${param[key]}] does match required data type`);
             } else {
                 expect(param[key]).to.be.a(
@@ -106,6 +106,7 @@ describe("Parameters test", () => {
                 // allowed to be 0
                 if(param.name == "blockReward"){
                     const isGreaterThanMax = param.value > param.max;
+                    console.log(`blockReward in RZR:${(param.value/1e18)}`);
                     expect(isGreaterThanMax).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] is higher than max allowed block reward`
@@ -113,6 +114,7 @@ describe("Parameters test", () => {
                 } else if (param.name == "minStake"){
                     // minStake not allowed to be less than current minStake
                     const isLessThanMin = param.value < param.min;
+                    console.log(`minStake in RZR:${(param.value/1e18)}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than the min stake of 1M tokens`
@@ -120,9 +122,50 @@ describe("Parameters test", () => {
                 } else if(param.name == "minSafeRazor"){
                     // minSafeRazor should not be less than the current min safe razor a validator needs to have staked
                     const isLessThanMin = param.value < param.min; 
+                    console.log(`minSafeRazor in RZR:${(param.value/1e18)}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than the min stake of 1M tokens`
+                    );
+                }
+            }
+            });
+        });
+  });
+
+  it("Parameter with Epochs should not be 0 and convert values to hours", () => {
+    mainnetParameters.map((param, index) => {
+        Object.keys(param).map((key) => {
+            if(key == "type" && param[key] == "epoch"){
+                if(param.name == "withdrawLockPeriod"){
+                    // withdrawLockPeriod should not be 0
+                    const isLessThanMin = param.value < param.min;
+                    console.log(`withdrawLockPeriod epochs in hours:${(param.value*20)/60}`);
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
+                    );
+                } else if (param.name == "withdrawInitiationPeriod"){
+                    // withdrawInitiationPeriod should not be 0
+                    const isLessThanMin = param.value < param.min;
+                    console.log(`withdrawInitiationPeriod epochs in hours:${(param.value*20)/60}`);
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
+                    );
+                } else if (param.name == "unstakeLockPeriod"){
+                    const isLessThanMin = param.value < param.min;
+                    console.log(`unstakeLockPeriod epochs in hours:${(param.value*20)/60}`);
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
+                    );
+                } else if(param.name == "epochLimitForUpdateCommission"){
+                    const isLessThanMin = param.value < param.min;
+                    console.log(`epochLimitForUpdateCommission epochs in hours:${(param.value*20)/60}`);
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
                     );
                 }
             }

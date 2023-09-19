@@ -11,7 +11,7 @@
       "min": 1,
       "max": 100,
       "value": 5,
-      "type": "block"
+      "type": null
     },
     {
       "name": "maxTolerance",
@@ -23,8 +23,8 @@
     {
       "name": "withdrawInitiationPeriod",
       "min": 1,
-      "max": 100000,
-      "value": 300,
+      "max": 1000,
+      "value": 150,
       "type": "epoch"
     },
     {
@@ -79,7 +79,7 @@
     {
       "name": "epochLimitForUpdateCommission",
       "min": 1,
-      "max": 100000,
+      "max": 10000,
       "value": 1000,
       "type": "epoch"
     },
