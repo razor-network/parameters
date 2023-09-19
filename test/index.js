@@ -29,7 +29,6 @@ describe("Parameters test", () => {
       Object.keys(param).map((key) => {
         if(key == "type") {
             if(param.name == "buffer" || param.name == "toAssign" || param.name == "maxAge") {
-                // expect(param[key]).to.be.null(`Mainnet Parameter ${param.name} [${key} ${param[key]}] does match required data type`);
                 assert.isNull(param[key], `Mainnet Parameter ${param.name} [${key} ${param[key]}] does match required data type`);
             } else {
                 expect(param[key]).to.be.a(
@@ -99,15 +98,31 @@ describe("Parameters test", () => {
     });
   });
 
-  it("Parameter with Tokens should be within delta", () => {
+  it("Parameter with Tokens should not be much less than or greater than required", () => {
     mainnetParameters.map((param, index) => {
         Object.keys(param).map((key) => {
             if(key == "type" && param[key] == "token"){
+                // blockReward not allowed to be greater than genesis block reward
+                // allowed to be 0
                 if(param.name == "blockReward"){
                     const isGreaterThanMax = param.value > param.max;
                     expect(isGreaterThanMax).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] is higher than max allowed block reward`
+                    );
+                } else if (param.name == "minStake"){
+                    // minStake not allowed to be less than current minStake
+                    const isLessThanMin = param.value < param.min;
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than the min stake of 1M tokens`
+                    );
+                } else if(param.name == "minSafeRazor"){
+                    // minSafeRazor should not be less than the current min safe razor a validator needs to have staked
+                    const isLessThanMin = param.value < param.min; 
+                    expect(isLessThanMin).to.be.eq(
+                        false,
+                        `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than the min stake of 1M tokens`
                     );
                 }
             }
