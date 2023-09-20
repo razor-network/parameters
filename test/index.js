@@ -172,27 +172,4 @@ describe("Parameters test", () => {
             });
         });
   });
-//   it("Parameter weight must be less than 100", async () => {
-//     mainnetParameters.map((job, index) => {
-//       const { name, weight } = job;
-//       let isWeightValid = weight >= 0 && weight <= 100;
-
-//       expect(isWeightValid).to.be.eq(
-//         true,
-//         `Mainnet Job[${name}] does not have required weight`
-//       );
-//     });
-//   });
-
-//   it("Parameter power must be less than 128", async () => {
-//     mainnetParameters.map((job, index) => {
-//       const { name, power } = job;
-//       let isPower = power >= -128 && power < 128;
-
-//       expect(isPower).to.be.eq(
-//         true,
-//         `Mainnet Job[${name}] does not have required power`
-//       );
-//     });
-//   });
 });
