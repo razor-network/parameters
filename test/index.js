@@ -1,6 +1,7 @@
 const mainnetParameters = require("../mainnet/parameters.json");
+const COLLECTION_MANAGER_ABI= require("../abis/CollectionManager.json");
 const chai = require("chai");
-
+const ethers = require("ethers");
 const { expect, assert } = chai;
 
 const keysWithType = {
@@ -11,7 +12,15 @@ const keysWithType = {
   type: "string" || null,
 };
 
+const {
+    RPC_URL,
+    COLLECTION_MANAGER_ADDRESS
+} = process.env;
+
 const requiredKeys = Object.keys(keysWithType).sort();
+const PROVIDER = "https://mainnet.skalenodes.com/v1/turbulent-unique-scheat";
+const COLLECTION_MANAGER = "0x367962d1462C568A0dDd0e2448311469451bF5a3";
+// const PRIVATE_KEY = process.env.DEPLOYER_KEY || "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 
 describe("Parameters test", () => {
 
@@ -28,6 +37,8 @@ describe("Parameters test", () => {
     mainnetParameters.map((param, index) => {
       Object.keys(param).map((key) => {
         if(key == "type") {
+            // buffer should not exceed 50% of state length
+            // maxAltBlocks should not be 0
             if(param.name == "buffer" || param.name == "toAssign" || param.name == "maxAge" || param.name == "maxAltBlocks") {
                 assert.isNull(param[key], `Mainnet Parameter ${param.name} [${key} ${param[key]}] does match required data type`);
             } else {
@@ -171,5 +182,42 @@ describe("Parameters test", () => {
             }
             });
         });
-  });
+    });
+
+    it("Parameters with null type: buffer, toAssign, maxAltBlocks, maxAge", async () => {
+        const provider = new ethers.providers.JsonRpcProvider(PROVIDER);
+        const collectionManager = new ethers.Contract(COLLECTION_MANAGER, COLLECTION_MANAGER_ABI, provider);
+        const numCollections = await collectionManager.numActiveCollections();
+        mainnetParameters.map((param, index) => {
+            Object.keys(param).map((key) => {
+                if(key == "type" && param[key] == null){
+                    if(param.name == "buffer"){
+                        // should be less than 60 so that it is less than 50% if the state length (240s)
+                        // upper limit and lower limit considered
+                        expect(param.value).to.be.lte(
+                            60,
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than 50% of the state length`
+                        );
+                    } else if(param.name === "toAssign"){
+                        // toAssign should be greater than 33% of the active collections
+                        expect(param.value).to.be.gte(
+                            numCollections * 0.33,
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than active collections`
+                        );
+                        // toAssign should be less than 300% of the active collections
+                        expect(param.value).to.be.lte(
+                            numCollections * 3,
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than active collections`
+                        );
+                    } else if(param.name === "maxAltBlocks"){
+                        // maxAltBlocks should not be 0
+                        expect(param.value).to.be.gt(
+                            0,
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is 0`
+                        );
+                    }
+                }
+                });
+            });
+      });
 });
