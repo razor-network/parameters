@@ -215,6 +215,12 @@ describe("Parameters test", () => {
                             0,
                             `Mainnet Parameter ${param.name} [${key} ${param[key]}] is 0`
                         );
+                    } else if(param.name === "maxAge"){
+                        // maxAge should not be less than param.min
+                        expect(param.value).to.be.gte(
+                            param.min,
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than min`
+                        );
                     }
                 }
                 });
