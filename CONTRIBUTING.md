@@ -42,4 +42,4 @@ Once tests pass successfully, create a pull request to the upstream `main` branc
 
 ### 6. Create a Proposal 
 
-The proposed changes will be available for community discussion and review in GitHub discussions. Community members are welcome to provide feedback and votes on the proposal. 
+The proposed changes will be available for community discussion and review in GitHub [discussions](https://github.com/razor-network/governance/discussions). Community members are welcome to provide feedback and votes on the proposal. 
