@@ -1,127 +1,91 @@
 [
     {
       "name": "withdrawLockPeriod",
-      "min": 1,
-      "max": 1000,
       "value": 300,
       "type": "epoch"
     },
     {
       "name": "maxAltBlocks",
-      "min": 1,
-      "max": 100,
       "value": 5,
       "type": null
     },
     {
       "name": "maxTolerance",
-      "min": 0,
-      "max": 100,
       "value": 1000000,
       "type": "percentage"
     },
     {
       "name": "withdrawInitiationPeriod",
-      "min": 1,
-      "max": 1000,
       "value": 150,
       "type": "epoch"
     },
     {
       "name": "resetUnstakeLockPenalty",
-      "min": 0,
-      "max": 100,
       "value": 1000,
       "type": "percentage"
     },
     {
       "name": "unstakeLockPeriod",
-      "min": 1,
-      "max": 1000,
       "value": 300,
       "type": "epoch"
     },
     {
       "name": "maxCommission",
-      "min": 0,
-      "max": 100,
       "value": 20,
       "type": "percentage"
     },
     {
       "name": "blockReward",
-      "min": 0,
-      "max": 2500000000000000000000,
       "value": 1852000000000000000000,
       "type": "token"
     },
     {
       "name": "minStake",
-      "min": 1000000000000000000000000,
-      "max": 1000000000000000000000000,
       "value": 1000000000000000000000000,
       "type": "token"
     },
     {
       "name": "penaltyNotRevealNum",
-      "min": 0,
-      "max": 100,
       "value": 100,
       "type": "percentage"
     },
     {
       "name": "penaltyAgeNotRevealNum",
-      "min": 0,
-      "max": 10000000,
       "value": 100000,
       "type": "percentage"
     },
     {
       "name": "epochLimitForUpdateCommission",
-      "min": 1,
-      "max": 10000,
       "value": 1000,
       "type": "epoch"
     },
     {
       "name": "deltaCommission",
-      "min": 0,
-      "max": 100,
       "value": 3,
       "type": "percentage"
     },
     {
       "name": "maxAge",
-      "min": 1000000,
-      "max": 10000000,
       "value": 1000000,
       "type": null
     },
     {
       "name": "minSafeRazor",
-      "min": 100000000000000000000000,
-      "max": 100000000000000000000000,
       "value": 100000000000000000000000,
       "type": "token"
     },
     {
       "name": "toAssign",
-      "min": 1,
-      "max": 10,
       "value": 3,
       "type": null
     },
     {
       "name": "buffer",
-      "min": 1,
-      "max": 300,
       "value": 30,
       "type": null
     },
     {
       "name": "slashNums",
-      "min": 0,
-      "max": 100,
       "value": {
         "bounty": 100000,
         "burn": 0,

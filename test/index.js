@@ -6,16 +6,9 @@ const { expect, assert } = chai;
 
 const keysWithType = {
   name: "string",
-  min: "number",
-  max: "number",
   value: "number",
   type: "string" || null,
 };
-
-const {
-    RPC_URL,
-    COLLECTION_MANAGER_ADDRESS
-} = process.env;
 
 const requiredKeys = Object.keys(keysWithType).sort();
 const PROVIDER = "https://mainnet.skalenodes.com/v1/turbulent-unique-scheat";
@@ -73,21 +66,21 @@ describe("Parameters test", () => {
         if(key == "type" && param[key] == "percentage"){
             if(param.name == "deltaCommission" || param.name == "maxCommission"){
                 expect((param.value)).to.be.gte(
-                    param.min,
+                    0,
                     `Mainnet Parameter ${param.name} [${key} ${param[key]}] is out of bounds`
                 );
                 expect((param.value)).to.be.lte(
-                    param.max,
+                    100,
                     `Mainnet Parameter ${param.name} [${key} ${param[key]}] is out of bounds`
                 );
             } else if(param.name != "slashNums"){
                 // use BASE_DENOMINATOR
                 expect((param.value/BASE_DENOMINATOR)*100).to.be.gte(
-                    param.min,
+                    0,
                     `Mainnet Parameter ${param.name} [${key} ${param[key]}] is out of bounds`
                 );
                 expect((param.value/BASE_DENOMINATOR)*100).to.be.lte(
-                    param.max,
+                    100,
                     `Mainnet Parameter ${param.name} [${key} ${param[key]}] is out of bounds`
                 );
             } else if (param.name == "slashNums") {
@@ -116,7 +109,7 @@ describe("Parameters test", () => {
                 // blockReward not allowed to be greater than genesis block reward
                 // allowed to be 0
                 if(param.name == "blockReward"){
-                    const isGreaterThanMax = param.value > param.max;
+                    const isGreaterThanMax = param.value > 2500000000000000000000; //2500 RZR
                     console.log(`blockReward in RZR:${(param.value/1e18)}`);
                     expect(isGreaterThanMax).to.be.eq(
                         false,
@@ -124,7 +117,7 @@ describe("Parameters test", () => {
                     );
                 } else if (param.name == "minStake"){
                     // minStake not allowed to be less than current minStake
-                    const isLessThanMin = param.value < param.min;
+                    const isLessThanMin = param.value < 1000000000000000000000000; //1000000 RZR
                     console.log(`minStake in RZR:${(param.value/1e18)}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
@@ -132,7 +125,7 @@ describe("Parameters test", () => {
                     );
                 } else if(param.name == "minSafeRazor"){
                     // minSafeRazor should not be less than the current min safe razor a validator needs to have staked
-                    const isLessThanMin = param.value < param.min; 
+                    const isLessThanMin = param.value < 100000000000000000000000; //100000 RZR
                     console.log(`minSafeRazor in RZR:${(param.value/1e18)}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
@@ -150,7 +143,7 @@ describe("Parameters test", () => {
             if(key == "type" && param[key] == "epoch"){
                 if(param.name == "withdrawLockPeriod"){
                     // withdrawLockPeriod should not be 0
-                    const isLessThanMin = param.value < param.min;
+                    const isLessThanMin = param.value < 1;
                     console.log(`withdrawLockPeriod epochs in hours:${(param.value*20)/60}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
@@ -158,21 +151,21 @@ describe("Parameters test", () => {
                     );
                 } else if (param.name == "withdrawInitiationPeriod"){
                     // withdrawInitiationPeriod should not be 0
-                    const isLessThanMin = param.value < param.min;
+                    const isLessThanMin = param.value < 1;
                     console.log(`withdrawInitiationPeriod epochs in hours:${(param.value*20)/60}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
                     );
                 } else if (param.name == "unstakeLockPeriod"){
-                    const isLessThanMin = param.value < param.min;
+                    const isLessThanMin = param.value < 1;
                     console.log(`unstakeLockPeriod epochs in hours:${(param.value*20)/60}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
                         `Mainnet Parameter ${param.name} [${key} ${param[key]}] should be atleast 1 epoch`
                     );
                 } else if(param.name == "epochLimitForUpdateCommission"){
-                    const isLessThanMin = param.value < param.min;
+                    const isLessThanMin = param.value < 1;
                     console.log(`epochLimitForUpdateCommission epochs in hours:${(param.value*20)/60}`);
                     expect(isLessThanMin).to.be.eq(
                         false,
@@ -218,7 +211,7 @@ describe("Parameters test", () => {
                     } else if(param.name === "maxAge"){
                         // maxAge should not be less than param.min
                         expect(param.value).to.be.gte(
-                            param.min,
+                            1000000,
                             `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than min`
                         );
                     }
