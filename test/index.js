@@ -195,12 +195,12 @@ describe("Parameters test", () => {
                         // toAssign should be greater than 33% of the active collections
                         expect(param.value).to.be.gte(
                             numCollections * 0.33,
-                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than active collections`
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is less than 33% of active collections`
                         );
                         // toAssign should be less than 300% of the active collections
                         expect(param.value).to.be.lte(
                             numCollections * 3,
-                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than active collections`
+                            `Mainnet Parameter ${param.name} [${key} ${param[key]}] is greater than 300% of active collections`
                         );
                     } else if(param.name === "maxAltBlocks"){
                         // maxAltBlocks should not be 0
