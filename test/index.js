@@ -13,7 +13,6 @@ const keysWithType = {
 const requiredKeys = Object.keys(keysWithType).sort();
 const PROVIDER = "https://mainnet.skalenodes.com/v1/turbulent-unique-scheat";
 const COLLECTION_MANAGER = "0x367962d1462C568A0dDd0e2448311469451bF5a3";
-// const PRIVATE_KEY = process.env.DEPLOYER_KEY || "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 
 describe("Parameters test", () => {
 
